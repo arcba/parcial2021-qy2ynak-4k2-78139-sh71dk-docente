@@ -1,0 +1,61 @@
+<h3>PRODUCTOS</h3>
+
+<div *ngIf="modo==1">
+  <div class="mb-3 text-right">
+    <button class="btn btn-primary" (click)="cambiarModo('agregar')">
+      Agregar producto
+    </button>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#ID</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Fecha alta</th>
+        <th scope="col">Stock</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let prod of productos">
+        <td>{{prod.ProductoID}}</td>
+        <td>{{prod.ProductoNombre}}</td>
+        <td>{{prod.ProductoFechaAlta}}</td>
+        <td>{{prod.ProductoStock}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="modo==2">
+  <div class="alert alert-danger" role="alert" *ngIf="datosIncorrectos">
+    Datos incorrectos
+  </div>
+  <form [formGroup]="formProducto">
+    <div class="form-group">
+      <label for="inputNombre">Nombre</label>
+      <input
+        formControlName="ProductoNombre"
+        type="text"
+        class="form-control"
+        id="inputNombre"
+        placeholder="Nombre"
+      />
+    </div>
+    <div class="form-group">
+      <label for="inputNombre">Stock</label>
+      <input
+        formControlName="ProductoStock"
+        type="number"
+        class="form-control"
+        id="inputStock"
+        placeholder="Stock"
+      />
+    </div>
+  </form>
+  <div>
+    <button class="btn btn-success mr-2" (click)="guardar()">Guardar</button>
+    <button class="btn btn-danger" (click)="cambiarModo('consultar')">
+      Cancelar
+    </button>
+  </div>
+</div>
